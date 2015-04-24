@@ -33,7 +33,7 @@ body {
 .cal-inner {
 
   @include padding(50px);
-  @include margin(170px null 50px null);
+  @include margin(20px null);
   background: white;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
