@@ -1,0 +1,75 @@
+/*
+ * Loading CSS spinner
+ * ---
+ * http://codepen.io/Zhouzi/pen/OPxYEq
+ */
+
+/*------------------------------------------------*\
+  Mixins
+\*------------------------------------------------*/
+
+@mixin square ($size: 20px) {
+  width: $size;
+  height: $size;
+}
+
+@mixin round ($size: 20px) {
+  @include square($size);
+  border-radius: 50%;
+}
+
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/*------------------------------------------------*\
+  Slack
+\*------------------------------------------------*/
+
+$white: #fff;
+$black: #000;
+$slack-size: 20px;
+$slack-ring-size: $slack-size * 2;
+$slack-ring-border: 4px;
+$slack-increment: 10px;
+
+@keyframes slack {
+  from {
+    width: $slack-ring-size;
+    height: $slack-ring-size;
+  }
+
+  to {
+    width: $slack-ring-size + $slack-increment;
+    height: $slack-ring-size + $slack-increment;
+  }
+}
+
+.item {
+  @include center();
+}
+
+.slack {
+  @include round($slack-size);
+
+  position: relative;
+  background-color: $white;
+  box-shadow: 0 0 4px 2px rgba($black, .2);
+
+  &:before {
+    @include center;
+    @include round($slack-ring-size);
+
+    content: "";
+    display: block;
+    border: $slack-ring-border solid $white;
+    box-shadow: inset 0 0 4px 2px rgba($black, .2), 0 0 4px 2px rgba($black, .2);
+    animation: slack 400ms linear infinite;
+    animation-direction: alternate;
+  }
+}
+

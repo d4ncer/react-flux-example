@@ -1,0 +1,10 @@
+.app-header {
+  text-align: center;
+  margin: 0;
+  .app-title {
+    font-size: 2.667em;
+    @include margin(1.333em null);
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  }
+}

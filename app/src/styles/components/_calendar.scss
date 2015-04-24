@@ -1,0 +1,185 @@
+// Calendar
+
+$blue: #2980b9;
+$orange: #e67e22;
+$black: #2c3e50;
+
+body {
+  background: $black;
+}
+
+.row {
+  @include row();
+}
+
+#calendar-loading {
+
+  display: none;
+
+  &.active {
+    display: block;
+    @include position(absolute, 0 0 0 0);
+    z-index: 9999;
+    background: rgba(0,0,0,0.3);
+  }
+}
+
+#calendar-wrapper {
+  @include outer-container();
+  
+  @include position(absolute, 0 0 0 0);
+}
+
+.cal-inner {
+
+  @include padding(50px);
+  @include margin(170px null 50px null);
+  background: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  
+  .cal-header {
+    text-align: center;
+    @include padding(2em null);
+    @include margin(null null 1.667em null);
+    background: $blue;
+    border-radius: 5px;
+    .header-controls {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      top: -5px;
+
+      &.left {
+        @include padding(0 30px 0 0);
+      }
+
+      &.right {
+        @include padding(0 0 0 30px);
+      }
+
+      .iconic-property-stroke {
+        stroke: black;
+      }
+
+      @media (max-width: 800px) {
+        top: -2px;
+        &.left {
+          @include padding(0 45px 0 0);
+        }
+
+        &.right {
+          @include padding(0 0 0 45px);
+        }
+      }
+    }
+    .cal-title {
+      display: inline-block;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+      margin: 0;
+      font-size: 1.667em;
+    }
+  }
+
+  .cal-sidebar {
+    @include span-columns(3);
+  }
+
+  .events-container {
+    @include span-columns(9);
+
+    .events-controls {
+      .controls {
+        @include span-columns(6);
+        text-align: center;
+        font-size: 1.13em;
+        @include padding(1em 0);
+        border-bottom: 1px solid $light-gray;
+        color: $blue;
+        cursor: pointer;
+
+        &.control-left {
+          border-left: 1px solid lighten($light-gray, 4);
+        }
+
+        &.control-right {
+          border-right: 1px solid lighten($light-gray, 4);
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      @include span-columns(12);
+    }
+  }
+
+}
+
+
+.event-item {
+
+  @include padding(null null 1.333em null);
+  @include margin(null null 1.333em null);
+  border-bottom: 1px solid $light-gray;
+
+  .date-container {
+    @include span-columns(3);
+    @include padding(15px);
+    border: 1px solid $medium-gray;
+    background: $orange;
+    font-weight: 700;
+    color: $black;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+
+    .date-inner {
+      text-align: center;
+
+      .event-date {
+        .date-item {
+          @include margin(0);
+          font-size: 1.333em;
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      @include span-columns(6);
+    }
+  }
+
+  .text-container {
+    @include span-columns(9);
+
+    .event-title {
+
+    }
+
+    .event-body {
+      font-size: 0.875em;
+      @include margin(0);
+    }
+
+    @media (max-width: 800px) {
+      @include span-columns(6);
+    }
+  }
+
+  &:last-of-type {
+    @include margin(0);
+  }
+}
+
+.no-events {
+  text-align: center;
+  @include padding(6em null 10em null);
+  color: $medium-gray;
+  border-bottom: 1px solid $light-gray;
+}
