@@ -56,26 +56,6 @@ var createAll = function(response, dateRange) {
 
 };
 
-AppDispatcher.register(function(payload) {
-  switch(payload.actionType) {
-    case 'REQUEST_RESOLVED':
-      createAll(payload.content, payload.dateRange);
-      EventStore.emitChange();
-      break;
-    case 'REQUEST_PENDING':
-      setState({
-        request: 'pending'
-      });
-      EventStore.emitChange();
-      break;
-    case 'POST_RESOLVED':
-      EventStore.emitChange();
-      break;
-    default:
-      return true;
-  }
-});
-
 var EventStore = assign({}, EventEmitter.prototype, {
 
   getState: function() {
@@ -92,6 +72,26 @@ var EventStore = assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  }
+});
+
+EventStore.dispatchToken = AppDispatcher.register(function(payload) {
+  switch(payload.actionType) {
+    case 'REQUEST_RESOLVED':
+      createAll(payload.content, payload.dateRange);
+      EventStore.emitChange();
+      break;
+    case 'REQUEST_PENDING':
+      setState({
+        request: 'pending'
+      });
+      EventStore.emitChange();
+      break;
+    case 'POST_RESOLVED':
+      EventStore.emitChange();
+      break;
+    default:
+      return true;
   }
 });
 
